@@ -21,10 +21,10 @@
                 <img class="mx-auto h-16 w-16 lg:hidden" src="{{ asset('images/app-logo.svg') }}" alt="logo" />
                 <div class="mt-4">
                     <h2 class="text-2xl font-semibold text-slate-600 dark:text-navy-100">
-                        Welcome Back
+                        Selamat datang
                     </h2>
                     <p class="text-slate-400 dark:text-navy-300">
-                        Please sign in to continue
+                        Silakan masuk untuk melanjutkan
                     </p>
                 </div>
             </div>
@@ -32,91 +32,32 @@
             <!-- <form class="mt-16" action="{{ route('login') }}" method="post"> -->
                 @method('POST') @csrf
                 <div>
-                    <div class="flex flex-col items-center mb-5">
-                        <label class="relative flex">Silahkan login dengan nomor whatsapp anda</label>
-                    </div>
-                    <label class="relative flex mb-2">No Whatsapp</label>
+                    <label class="relative flex mb-2">Username</label>
                     <label class="relative flex">
                         <input
                             class="form-input peer w-full rounded-lg bg-slate-150 px-3 py-2 pl-9 ring-primary/50 placeholder:text-slate-400 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:placeholder:text-navy-300 dark:hover:bg-navy-900 dark:focus:bg-navy-900"
                             placeholder="No Whatsapp" type="text" name="telp"
                             value="{{ old('telp') ?? '' }}" />
-                        <span
-                            class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-colors duration-200"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <!-- <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /> -->
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                    d="M280 0C408.1 0 512 103.9 512 232c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-101.6-82.4-184-184-184c-13.3 0-24-10.7-24-24s10.7-24 24-24zm8 192a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm-32-72c0-13.3 10.7-24 24-24c75.1 0 136 60.9 136 136c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-48.6-39.4-88-88-88c-13.3 0-24-10.7-24-24zM117.5 1.4c19.4-5.3 39.7 4.6 47.4 23.2l40 96c6.8 16.3 2.1 35.2-11.6 46.3L144 207.3c33.3 70.4 90.3 127.4 160.7 160.7L345 318.7c11.2-13.7 30-18.4 46.3-11.6l96 40c18.6 7.7 28.5 28 23.2 47.4l-24 88C481.8 499.9 466 512 448 512C200.6 512 0 311.4 0 64C0 46 12.1 30.2 29.5 25.4l88-24z"/>
-                            </svg> 
-
-                        </span>
                     </label>
                     @error('email')
                         <span class="text-tiny+ text-error">{{ $message }}</span>
                     @enderror
                 </div>
-                <!-- <div class="mt-4">
+                <div>
+                    <label class="relative flex mb-2">Password</label>
                     <label class="relative flex">
                         <input
                             class="form-input peer w-full rounded-lg bg-slate-150 px-3 py-2 pl-9 ring-primary/50 placeholder:text-slate-400 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:placeholder:text-navy-300 dark:hover:bg-navy-900 dark:focus:bg-navy-900"
-                            placeholder="Password" type="password" name="password"
-                            value="{{ old('password') ?? 'password' }}" />
-                        <span
-                            class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transition-colors duration-200"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-                            </svg>
-                        </span>
+                            placeholder="Password" type="text" name="password" />
                     </label>
-                    @error('password')
+                    @error('email')
                         <span class="text-tiny+ text-error">{{ $message }}</span>
                     @enderror
-                </div> -->
-
-                <!-- <div class="mt-4 flex items-center justify-between space-x-2">
-                    <label class="inline-flex items-center space-x-2">
-                        <input
-                            class="form-checkbox is-outline h-5 w-5 rounded border-slate-400/70 bg-slate-100 before:bg-primary checked:border-primary hover:border-primary focus:border-primary dark:border-navy-500 dark:bg-navy-900 dark:before:bg-accent dark:checked:border-accent dark:hover:border-accent dark:focus:border-accent"
-                            type="checkbox" />
-                        <span class="line-clamp-1">Remember me</span>
-                    </label>
-                    <a href="#"
-                        class="text-xs text-slate-400 transition-colors line-clamp-1 hover:text-slate-800 focus:text-slate-800 dark:text-navy-300 dark:hover:text-navy-100 dark:focus:text-navy-100">Forgot
-                        Password?</a>
-                </div> -->
+                </div>
                 <button type="submit"
                     class="btn mt-10 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
                     Lanjutkan
                 </button>
-                <div class="mt-4 text-center text-xs+">
-                    <p class="line-clamp-1">
-                        <span>Dont have Account?</span>
-
-                        <a class="text-primary transition-colors hover:text-primary-focus dark:text-accent-light dark:hover:text-accent"
-                            href="{{ route('registerView') }}">Create account</a>
-                    </p>
-                </div>
-                <div class="my-7 flex items-center space-x-3">
-                    <div class="h-px flex-1 bg-slate-200 dark:bg-navy-500"></div>
-                    <p>OR</p>
-                    <div class="h-px flex-1 bg-slate-200 dark:bg-navy-500"></div>
-                </div>
-                <div class="flex space-x-4">
-                    <button
-                        class="btn w-full space-x-3 border border-slate-300 font-medium text-slate-800 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-50 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
-                        <img class="h-5.5 w-5.5" src="{{ asset('images/100x100.png') }}" alt="logo" />
-                        <span>Google</span>
-                    </button>
-                    <button
-                        class="btn w-full space-x-3 border border-slate-300 font-medium text-slate-800 hover:bg-slate-150 focus:bg-slate-150 active:bg-slate-150/80 dark:border-navy-450 dark:text-navy-50 dark:hover:bg-navy-500 dark:focus:bg-navy-500 dark:active:bg-navy-500/90">
-                        <img class="h-5.5 w-5.5" src="{{ asset('images/100x100.png') }}" alt="logo" />
-                        <span>Github</span>
-                    </button>
-                </div>
             </form>
         </div>
         <div class="my-5 flex justify-center text-xs text-slate-400 dark:text-navy-300">
@@ -125,4 +66,8 @@
             <a href="#">Term of service</a>
         </div>
     </main>
+
+    <script>
+        localStorage.clear();
+    </script>
 </x-base-layout>

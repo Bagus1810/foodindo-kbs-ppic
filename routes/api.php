@@ -48,20 +48,32 @@ Route::post('/wa/webhook', function (Request $request) {
         $checkUser->update([
             'status' => 'login'
         ]);
-        return;
+        // return;
+        // 22:16 update untuk kirim wa login berhasil, silahkan kembali ke browser 
+
+        // Contoh logika
+        $reply = match (strtolower($text)) {
+            'hai', 'halo' => 'Halo juga! 👋',
+            'siapa kamu' => 'Saya bot Laravel 🤖',
+            default => "Nomor $from berhasil login, silahkan kembali ke browser anda."
+        };
+        // digunakan untuk membalas wa 
+        return response()->json(['reply' => $reply]);
+
+
     }
 
     // Log ke Laravel
-    \Log::info("WhatsApp dari: $from | Pesan: $text");
+    // \Log::info("WhatsApp dari: $from | Pesan: $text");
 
     // Contoh logika
-    $reply = match (strtolower($text)) {
-        'hai', 'halo' => 'Halo juga! 👋',
-        'siapa kamu' => 'Saya bot Laravel 🤖',
-        default => "Nomor ini  : $from   sedang jadi bot, wa kamu: $text"
-    };
+    // $reply = match (strtolower($text)) {
+    //     'hai', 'halo' => 'Halo juga! 👋',
+    //     'siapa kamu' => 'Saya bot Laravel 🤖',
+    //     default => "Nomor ini  : $from   sedang jadi bot, wa kamu: $text"
+    // };
     // digunakan untuk membalas wa 
-    return response()->json(['reply' => $reply]);
+    // return response()->json(['reply' => $reply]);
 });
 
 

@@ -43,13 +43,13 @@
                         @if(session('codename'))
                             <input
                                 class="form-input peer w-full rounded-lg bg-slate-150 px-3 py-2 pl-9 ring-primary/50 placeholder:text-slate-400 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:placeholder:text-navy-300 dark:hover:bg-navy-900 dark:focus:bg-navy-900"
-                                placeholder="No Whatsapp" type="text" name="telp" id="copyInput"
+                                placeholder="No Whatsapp" type="text" name="telp" id="code-wa"
                                 value="{{ session('codename') }}" />
                                 <!-- value="{{ session('codename') }}" onclick="copyToClipboard(this)" data-copy="{{ session('codename') }}" /> -->
                         @else
                             <input
                                 class="form-input peer w-full rounded-lg bg-slate-150 px-3 py-2 pl-9 ring-primary/50 placeholder:text-slate-400 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:placeholder:text-navy-300 dark:hover:bg-navy-900 dark:focus:bg-navy-900"
-                                placeholder="Kembali untuk mendapatkan kode" type="text" name="telp" id="copyInput"
+                                placeholder="Kembali untuk mendapatkan kode" type="text" name="telp" id="code-wa"
                                 />
                         @endif
                        
@@ -110,19 +110,19 @@
                         class="text-xs text-slate-400 transition-colors line-clamp-1 hover:text-slate-800 focus:text-slate-800 dark:text-navy-300 dark:hover:text-navy-100 dark:focus:text-navy-100">Forgot
                         Password?</a>
                 </div> -->
-                <button type="button"
+                <!-- <button type="button"
                     class="btn mt-10 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
                     Lanjutkan
-                </button>
-                <div class="mt-4 text-center text-xs+">
+                </button> -->
+                <!-- <div class="mt-4 text-center text-xs+">
                     <p class="line-clamp-1">
                         <span>Dont have Account?</span>
 
                         <a class="text-primary transition-colors hover:text-primary-focus dark:text-accent-light dark:hover:text-accent"
                             href="{{ route('registerView') }}">Create account</a>
                     </p>
-                </div>
-                <div class="my-7 flex items-center space-x-3">
+                </div> -->
+                <!-- <div class="my-7 flex items-center space-x-3">
                     <div class="h-px flex-1 bg-slate-200 dark:bg-navy-500"></div>
                     <p>OR</p>
                     <div class="h-px flex-1 bg-slate-200 dark:bg-navy-500"></div>
@@ -138,7 +138,7 @@
                         <img class="h-5.5 w-5.5" src="{{ asset('images/100x100.png') }}" alt="logo" />
                         <span>Github</span>
                     </button>
-                </div>
+                </div> -->
             </form>
         </div>
         <div class="my-5 flex justify-center text-xs text-slate-400 dark:text-navy-300">
@@ -149,8 +149,22 @@
     </main>
 
     <script>
+        var code = `{{ session('codename') }}`;
+        var telp = `{{ session('telp') }}`;
+        if (code && telp) {
+            localStorage.clear();
+            localStorage.setItem('code', code);
+            localStorage.setItem('telp', telp);
+        }
+        var  code = localStorage.getItem('code');
+        var  telp = localStorage.getItem('telp');
+        // Tampilkan dari localStorage (meskipun refresh)
+        if (code) {
+            document.getElementById('code-wa').value = code;
+        }
+
         function copyToClipboard() {
-            const input = document.getElementById('copyInput');
+            const input = document.getElementById('code-wa');
             const buttonCopy = document.getElementById('buttonCopy');
             const bubble = document.getElementById('copiedBubble');
 
@@ -168,7 +182,6 @@
                     buttonCopy.classList.add('opacity-100', 'scale-100');
                 }, 1500);
                
-
                 // Sembunyikan kembali
                 setTimeout(() => {
                     bubble.classList.remove('opacity-100', 'scale-100');
@@ -177,29 +190,20 @@
             });
         }
 
-        var code = `{{ session('codename') }}`
-        var telp = `{{ session('telp') }}`
+   
         setInterval(async () => {
-            // di fetch ini, lempar data berupa nomor telp dan kode, tembak ke api, cek status row ini, apakah sudah done atua belum
+            // di fetch ini, lempar data berupa nomor telp dan kode, tembak ke backend, cek status row ini, apakah sudah done atau belum
             // kalau done, langsung pindahkan lagi fetch lagi, dengan nomor telp, untu proses login 
-    
-            const res = await fetch(`https://e18a-2001-448a-2003-3c3b-51cb-6e3a-2a37-9df6.ngrok-free.app/check/login?code=${code}&&telp=${telp}`);
+            const res = await fetch(`https://57af-2001-448a-2003-3c3b-500a-5425-787e-8cb9.ngrok-free.app/check/login?code=${code}&&telp=${telp}`);
             const data = await res.json();
             console.log('liat statusnya login atau tidak',data.hasil[0].status);
             if (data.hasil[0].status == 'login'){
-                const res = await fetch(`https://e18a-2001-448a-2003-3c3b-51cb-6e3a-2a37-9df6.ngrok-free.app/login-wa?code=${code}&&telp=${telp}`);
+                const res = await fetch(`https://57af-2001-448a-2003-3c3b-500a-5425-787e-8cb9.ngrok-free.app/login-wa?code=${code}&&telp=${telp}`);
                 const data = await res.json();
-                console.log('di luar if redirect disini',data.message);
                 if (data.message = 'berhasil'){
-                    console.log('di dalam redirect disini');
                     window.location.href = data.redirect; 
                 }
-            
-            
             }
-            // if (data.reply = 'ok') {
-            //     window.location.href = 'https://e18a-2001-448a-2003-3c3b-51cb-6e3a-2a37-9df6.ngrok-free.app';
-            // }
         }, 5000);
     </script>
 

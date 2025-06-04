@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
@@ -558,12 +559,40 @@ class PagesController extends Controller
         // return view('pages/dashboards-crm-analytics');
     }
     
-    // INDEX PENGAJUAN KASUS BARU 
-    public function indexPengajuanKasusBaru()
-    {
-        $user = Auth::user();
+   
 
-        return view('app-pages/pengajuan-kasus-baru');
+    // public function formPengajuanKasusBaru(Request $request)
+    // {
+    //     $user = Auth::user();
+
+    //     // dd($request->agree);
+    //     if(isset($request->agree)){
+    //         // dd('ada lempar centang');
+    //         // masuk ke halaman validasi 
+    //         return view('app-pages/form-validasi-pengajuan-kasus-baru', ['cases' => strtoupper($request->kasus_baru), 'opsi' => $request->kasus_baru]);
+    //     }else{
+    //         // dd($request->kasus_baru);
+    //         // dd('tidak ada lempar centang');
+    //         // masuk ke halaman submit option dll 
+
+           
+
+
+    //         return view('app-pages/form-pengajuan-kasus-baru', ['cases' => strtoupper($request->kasus_baru), 'opsi' => $request->kasus_baru]);
+    //     }
+     
+    //     return view('app-pages/pengajuan-kasus-baru');
+    // }
+
+    public function createPengajuanKasusBaru(Request $request){
+        if ($request->hasFile('image_video')) {
+            foreach ($request->file('image_video') as $file) {
+                // Do something with $file
+                dd($file); // Untuk debug
+            }
+        }
+        
+        dd($request);
     }
 
     public function dashboardsOrders()

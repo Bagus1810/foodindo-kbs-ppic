@@ -63,6 +63,35 @@ return [
             ]) : [],
         ],
 
+        'sqlsrv' => [
+            'driver' => 'sqlsrv',
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST', '192.168.1.89'),
+            'port' => env('DB_PORT', '1433'),
+            'database' => env('DB_DATABASE', 'forge'),
+            'username' => env('DB_USERNAME', 'forge'),
+            'password' => env('DB_PASSWORD', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'encrypt' => 'yes', // alternatively, defer to an env variable
+             'trust_server_certificate' => 'true', // alternatively, defer to an env variable
+        ],
+         'second_db' => [
+            'driver' => 'sqlsrv',
+            'url' => env('DATABASE_URL'),
+            // 'host' => env('SECOND_DB_HOST', '192.168.1.89'),
+            'host' => env('SECOND_DB_HOST', '192.168.1.89'),
+            'port' => env('SECOND_DB_PORT', '1433'),
+            'database' => env('SECOND_DB_DATABASE', 'forge'),
+            'username' => env('SECOND_DB_USERNAME', 'forge'),
+            'password' => env('SECOND_DB_PASSWORD', ''),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'encrypt' => 'yes', // alternatively, defer to an env variable
+             'trust_server_certificate' => 'true', // alternatively, defer to an env variable
+        ],
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),

@@ -1,108 +1,58 @@
-<x-app-layout title="Pengajuan Kasus Baru" is-header-blur="true" >
+<x-app-layout title="Form Rekening" is-header-blur="true" >
+   
     <!-- Main Content Wrapper -->
     <main class="main-content w-full pb-8">
-        <!-- <div class="flex justiy-content-center gap-1 mb-2" style="background:red;">
-            <div class="dark:bg-navy-700 p-2">
-                <p class="text-xl font-semibold text-slate-700 dark:text-navy-100 mb-2">
-                        PENGAJUAN KASUS BARU 2
-                    </p>
-            </div>
-        </div> -->
         <div class="mt-4 grid grid-cols-12 gap-4 px-[var(--margin-x)] transition-all duration-[.25s] sm:mt-5 sm:gap-5 lg:mt-6 lg:gap-6">
             <div class="col-span-12 flex justify-center mb-5">
                 <div class="rounded-lg bg-slate-150 p-4 dark:bg-navy-700 w-auto flex justify-center">
                     <p class="text-sm font-semibold text-slate-700 dark:text-navy-100">
-                        PENGAJUAN KASUS BARU
+                        HALAMAN BANK
                     </p>
                 </div>
             </div>
             <div class="flex flex-col justify-center items-center" style="position:absolute;">
                 <div class="bg-blue-500 text-white p-4 rounded">
-                    <a class="font-medium text-white" href="/" role="button">
+                    <a class="font-medium text-white" href="/pengajuan-kasus-baru" role="button">
                         <i class="fa-solid fa-angle-left"></i>
                     </a>
                 </div>
             </div>
-            
-            @if (session('error'))
-                <div class="col-span-12  alert flex overflow-hidden rounded-lg bg-warning/10 text-warning dark:bg-warning/15">
-                    <div class="flex flex-1 items-center space-x-3 p-4">
-                        <div>
-                            <div class="flex me-1">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="h-5 w-5"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                >
-                                    <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-                                    />
-                                </svg>
-                                <strong>Ada beberapa kesalahan:</strong>
-                            </div>
-                            <div>
-                                {{ session('error') }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-1.5 bg-warning"></div>
-                </div>
-            @endif
-
-            <form method="POST" action="/create-pengajuan-kasus-baru" class="grid grid-cols-12 col-span-12" enctype="multipart/form-data">
+         
+            <form method="POST" action="/create-rekening" enctype="multipart/form-data" class="grid grid-cols-12 col-span-12">
                 @csrf
-                <div class="grid grid-cols-12 col-span-12 p-1 flex justify-center mb-5">
+
+             
+                <div class="grid grid-cols-12 col-span-12 p-1 flex justify-center mb-2">
                     <label class="block col-span-12">
-                        <span>JENIS KASUS </span>
-                        <select
-                        class="form-select mt-1.5 w-full rounded-full border border-slate-300 bg-white px-4 py-2 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent"
-                         name="jenis_kasus">
-                        <option value="verifikasi latar belakang">VERIFIKASI LATAR BELAKANG</option>
-                        <option value="investigasi case">INVESTIGASI CASE</option>
-                        <option value="perselingkuhan">PERSELINGKUHAN</option>
-                        <option value="keluarga">KELUARGA</option>
-                        <option value="bisnis">BISNIS</option>
+                        <span>NAMA BANK</span>
+                        <select class="form-select mt-1.5 w-full rounded-full border border-slate-300 bg-white px-4 py-2 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:bg-navy-700 dark:hover:border-navy-400 dark:focus:border-accent" name="nama_bank">
+                            <option value="BCA">BCA</option>
+                            <option value="BRI">BRI</option>
+                            <option value="MANDIRI">MANDIRI</option>
                         </select>
                     </label>
                 </div>
-
                 <div class="grid grid-cols-12 col-span-12 p-1 flex justify-center mb-2">
                     <label class="block col-span-12">
-                        <!-- <span>NAMA TARGET LENGKAP</span> -->
-                        <span>NAMA LENGKAP DAN GELAR</span>
+                        <span>NOMOR REKENING</span>
                         <span class="relative mt-1.5 flex">
                         <input
-                            class="form-input w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                            placeholder="NAMA LENGKAP DAN GELAR"
+                            class="form-input peer w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
+                            placeholder="NOMOR REKENING"
                             type="text"
-                            name="nama_lengkap_dan_gelar"
+                            name="nomor_rekening"
                         />
+                        <span
+                            class="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent"
+                        >
+                            <i class="far fa-user text-base"></i>
                         </span>
-                    </label>
-                </div>
-                <div class="grid grid-cols-12 col-span-12 p-1 flex justify-center mb-2">
-                    <label class="block col-span-12">
-                        <!-- <span>NAMA TARGET LENGKAP</span> -->
-                        <span>NO HANDPHONE</span>
-                        <span class="relative mt-1.5 flex">
-                        <input
-                            class="form-input w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                            placeholder="NO HANDPHONE"
-                            type="text"
-                            name="no_handphone"
-                        />
                         </span>
                     </label>
                 </div>
                 <div class="grid grid-cols-12 col-span-12 p-1 flex justify-center">
                     <label class="block col-span-12 mb-2">
-                        <span>FOTO</span>
-                        <span class="relative mt-1.5 flex">
+                        <span>QRIS</span>
                     </label>
                     <div class="filepond fp-bordered col-span-12">
                         <fieldset class="upload_dropZone text-center border-slate-300 bg-transparent p-2.5 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent mb-2">
@@ -115,7 +65,7 @@
 
                             <p class="small my-2">Drag &amp; Drop background image(s) inside dashed region<br><i>or</i></p>
 
-                            <input id="upload_image_background" name="foto[]" class="position-absolute hidden" type="file" multiple accept="image/jpeg, image/png, image/svg+xml" />
+                            <input id="upload_image_background" name="qris[]" class="position-absolute hidden" type="file" multiple accept="image/jpeg, image/png, image/svg+xml" />
 
                             <label class="btn btn-upload btn-primary mb-3" for="upload_image_background">Pilih Gambar</label>
 
@@ -124,29 +74,10 @@
                         </fieldset>
                     </div>
                 </div>
-    
-                <!-- lagi disini, mumet kwkw  -->
-                 
-                <!-- <div class="col-span-12 flex justify-center p-1 mb-2">
-                    <label class="inline-flex items-center space-x-2">
-                        <input
-                        class="form-checkbox is-basic h-5 w-5 rounded border-slate-400/70 checked:bg-success checked:!border-success hover:!border-success focus:!border-success dark:border-navy-400"
-                        type="checkbox" name="agree"
-                        />
-                        <div>
-                            <p>ADA LAPORAN KEPOLISIAN</p>
-                            <p>ADA LAPORAN POLISI MILTER</p>
-                        </div>
-                    </label>
-                </div> -->
                 <div class="col-span-12 flex justify-center p-1">
                     <button class="btn bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90" type="submit">
-                        Lanjutkan
+                        Submit
                     </button>
-
-                    <!-- <a class="btn bg-primary font-medium text-white" href="/verifikasi-latar-belakang" role="button">
-                        Lanjutkan
-                    </a> -->
                     <!-- <button type="submit"
                         class="btn mt-10 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
                         Lanjutkan
@@ -321,5 +252,5 @@
 
     </script>
 
- 
+   
 </x-app-layout>

@@ -1,6 +1,16 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LeadTimeController;
+use App\Http\Controllers\PoController;
+
+
+
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\VerifikasiLatarBelakangController;
+use App\Http\Controllers\PengajuanKasusController;
+use App\Http\Controllers\BankController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,26 +29,66 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [\App\Http\Controllers\AuthController::class, 'loginView'])->name('loginView');
-    Route::get('/login-wa', [\App\Http\Controllers\AuthController::class, 'loginWa'])->name('loginWa');
-    Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login');
-    Route::get('/register', [\App\Http\Controllers\AuthController::class, 'registerView'])->name('registerView');
-    Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register'])->name('register');
-    Route::get('/register-code', [\App\Http\Controllers\AuthController::class, 'registerCode'])->name('register-code');
-    Route::get('/check/login', [\App\Http\Controllers\AuthController::class, 'checkLogin'])->name('check-login');
+    Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'indexDashboard'])->name('index-dashboard');
+    Route::post('/dashboard', [\App\Http\Controllers\DashboardController::class, 'getItemDashboard'])->name('get-item-dashboard');
+    
+    Route::get('/index-lead-time', [\App\Http\Controllers\LeadTimeController::class, 'indexLeadTime'])->name('index-lead-time');
+    Route::post('/create-lead-time', [\App\Http\Controllers\LeadTimeController::class, 'createLeadTime'])->name('create-lead-time');
+    Route::post('/update-lead-time', [\App\Http\Controllers\LeadTimeController::class, 'updateLeadTime'])->name('update-lead-time');
+    Route::post('/delete-lead-time', [\App\Http\Controllers\LeadTimeController::class, 'deleteLeadTime'])->name('delete-lead-time');
+
+     Route::get('/apps/filemanager', [PagesController::class, 'appsFilemanager'])->name('apps/filemanager');
+     Route::get('/index-po', [PoController::class, 'indexPo'])->name('index-po');
+
+
+
+    // Route::get('/login-wa', [\App\Http\Controllers\AuthController::class, 'loginWa'])->name('loginWa');
+    // Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login');
+    // Route::get('/register', [\App\Http\Controllers\AuthController::class, 'registerView'])->name('registerView');
+    // Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register'])->name('register');
+    // Route::get('/register-code', [\App\Http\Controllers\AuthController::class, 'registerCode'])->name('register-code');
+    // Route::get('/check/login', [\App\Http\Controllers\AuthController::class, 'checkLogin'])->name('check-login');
 });
 
+// Route::middleware('auth')->group(function () {
 // Route::middleware('auth')->group(function () {
 Route::middleware('guest')->group(function () {
     Route::post('/logout', [\App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
     Route::get('/', [PagesController::class, 'dashboardsCrmAnalytics'])->name('index');
 
+    // Route::post('/create-verifikasi-latar-belakang', [VerifikasiLatarBelakangController::class, 'creteVerifikasiLatarBelakang'])->name('create-verifikasi-latar-belakang');
+
+    // 22-04-2025 
+    Route::get('/verifikasi-latar-belakang', [VerifikasiLatarBelakangController::class, 'indexVerifikasiLatarBelakang'])->name('index-verifikasi-latar-belakang');
+    Route::post('/create-verifikasi-latar-belakang', [VerifikasiLatarBelakangController::class, 'createVerifikasiLatarBelakang'])->name('create-verifikasi-latar-belakang');
+    Route::get('/informasi-tambahan', [VerifikasiLatarBelakangController::class, 'indexInformasiTambahan'])->name('index-informasi-tambahan');
+    Route::post('/create-informasi-tambahan', [VerifikasiLatarBelakangController::class, 'createInformasiTambahan'])->name('create-informasi-tambahan');
+
+    Route::get('/kasus-baru', [PengajuanKasusController::class, 'indexKasusBaru'])->name('index-kasus-baru');
+    Route::post('/create-kasus-baru', [PengajuanKasusController::class, 'creteKasusBaru'])->name('create-kasus-baru');
 
 
-    Route::get('/pengajuan-kasus-baru', [PagesController::class, 'indexPengajuanKasusBaru'])->name('index-pengajuan-kasus-baru');
+    // 22-04-2025 
 
 
 
 
+
+    // edit 
+    Route::get('/pengajuan-kasus-baru', [PengajuanKasusController::class, 'indexPengajuanKasusBaru'])->name('index-pengajuan-kasus-baru');
+    Route::get('/form-validasi-laporan', [PengajuanKasusController::class, 'indexFormValidasiLaporan'])->name('index-form-validasi-laporan');
+    Route::post('/form-pengajuan-kasus-baru', [PengajuanKasusController::class, 'createformPengajuanKasusBaru'])->name('create-form-pengajuan-kasus-baru');
+    Route::get('/form-pengajuan-kasus-baru', [PengajuanKasusController::class, 'indexFormPengajuanKasusBaru'])->name('index-form-pengajuan-kasus-baru');
+    Route::post('/create-pengajuan-kasus-baru', [PengajuanKasusController::class, 'createPengajuanKasusBaru'])->name('create-pengajuan-kasus-baru');
+
+
+
+
+
+    Route::get('/transfer', [PengajuanKasusController::class, 'indexTransfer'])->name('index-transfer');
+
+    Route::get('/bank', [BankController::class, 'indexBank'])->name('index-bank');
+    Route::post('/create-rekening', [BankController::class, 'createRekening'])->name('create-rekening');
 
     Route::get('/elements/avatar', [PagesController::class, 'elementsAvatar'])->name('elements/avatar');
     Route::get('/elements/alert', [PagesController::class, 'elementsAlert'])->name('elements/alert');
@@ -144,7 +194,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/layouts/starter-sideblock', [PagesController::class, 'layoutsStarterSideblock'])->name('layouts/starter-sideblock');
 
     Route::get('/apps/chat', [PagesController::class, 'appsChat'])->name('apps/chat');
-    Route::get('/apps/filemanager', [PagesController::class, 'appsFilemanager'])->name('apps/filemanager');
+    // Route::get('/apps/filemanager', [PagesController::class, 'appsFilemanager'])->name('apps/filemanager');
     Route::get('/apps/kanban', [PagesController::class, 'appsKanban'])->name('apps/kanban');
     Route::get('/apps/list', [PagesController::class, 'appsList'])->name('apps/list');
     Route::get('/apps/mail', [PagesController::class, 'appsMail'])->name('apps/mail');

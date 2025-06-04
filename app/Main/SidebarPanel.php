@@ -578,9 +578,13 @@ class SidebarPanel
                         'route_name' => 'dashboards/crm-analytics'
                     ],
                     'dashboards_orders' => [
-                        'title' => 'Orders',
-                        'route_name' => 'dashboards/orders'
+                        'title' => 'Bank',
+                        'route_name' => 'index-bank'
                     ],
+                    // 'dashboards_orders' => [
+                    //     'title' => 'Orders',
+                    //     'route_name' => 'dashboards/orders'
+                    // ],
                 ],
                 [
                     'dashboards_crypto' => [
