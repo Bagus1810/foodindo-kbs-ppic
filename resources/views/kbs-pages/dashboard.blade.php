@@ -1259,6 +1259,10 @@
                                         </th>
                                         <th
                                             class="whitespace-nowrap rounded-tl-lg bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
+                                            Buffer by Lead Time + (Buffer {{$buffer_stock}}% - Stock)
+                                        </th>
+                                        <th
+                                            class="whitespace-nowrap rounded-tl-lg bg-slate-200 px-4 py-3 font-semibold uppercase text-slate-800 dark:bg-navy-800 dark:text-navy-100 lg:px-5">
                                             Stock + PO
                                         </th>
                                     @endif
@@ -1346,14 +1350,17 @@
                                         <td class="whitespace-nowrap px-4 py-3 sm:px-5">
                                             {{$getDataReg -> buffer_by_lead_time}}
                                         </td>
+                                        <td class="whitespace-nowrap px-4 py-3 sm:px-5">
+                                            {{$getDataReg -> total_buffer}}
+                                        </td>
+                                        <td class="whitespace-nowrap px-4 py-3 sm:px-5">
+                                            Stock + PO = 0 
+                                        </td>
                                     @endif
                                 
                                   
                                     <td class="whitespace-nowrap px-4 py-3 sm:px-5">
-                                        0
-                                    </td>
-                                    <td class="whitespace-nowrap px-4 py-3 sm:px-5">
-                                        tes
+                                        Button
                                     </td>
                                     <!-- <td class="whitespace-nowrap px-4 py-3 sm:px-5">
                                         2 day ago

@@ -128,6 +128,16 @@ class DashboardController extends Controller
                     DB::raw(
                         'COALESCE(CAST(lt.HARI * CEILING((SUM(TR_SALES.QUANTITY) / ' . $request->total_bulan . ') / ' . $rataRataHarian . ') AS INT), 0) as buffer_by_lead_time'
                     ),
+                    DB::raw(
+                        'COALESCE(CAST(
+                            (
+                                (lt.HARI * CEILING((SUM(TR_SALES.QUANTITY) / ' . $request->total_bulan . ') / ' . $rataRataHarian . '))
+                                +
+                                (CEILING(((SUM(TR_SALES.QUANTITY) / ' . $request->total_bulan . ') * ' . $bufferStock . ') / 100) - CAST(MS_STOCK.STOCK_QTY AS INT))
+                            )
+                        AS INT), 0) as total_buffer'
+                    ),
+
                     // DB::raw('COALESCE(CAST(FLOOR(SUM(TR_SALES.QUANTITY) / ' . $request->total_bulan . ') AS INT), 0) as average_penjualan'),
                     // DB::raw('COALESCE(CAST(sales_this_month.qty_bulan_ini AS INT), 0) as penjualan_bulan_ini'),
                     // DB::raw('COALESCE(CAST(FLOOR(SUM(TR_SALES.QUANTITY) / ' . $totalDay . ') * ' . $sisaHari . ' AS INT), 0) as estimasi_sisa_bulan'),
